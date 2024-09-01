@@ -258,6 +258,7 @@ def writeChinese(key_result: int, text_w: str = None, path_open: str = None, pat
         else:
             tr_: str = translator.translate(line_out)
             print(tr_, end="\n")
+        print(line_out)
     else:
         sen_txt: int = 0
         len_txt: int = 0
@@ -296,7 +297,6 @@ def writeOutput(key_result: int, text_w: str = None, path_open: str = None, path
             with open(path_open, "r", encoding="utf-8") as f_wo:
                 for line_w in f_wo:
                     line_w = decode(key_result, line_w)
-                    print(line_w)
                     w.write(line_w)
                     len_text += 1
     print(f"密钥为: 右移{key_result}位")
