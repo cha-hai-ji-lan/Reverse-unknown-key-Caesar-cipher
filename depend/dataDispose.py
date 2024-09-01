@@ -168,7 +168,6 @@ def produceCiphertext() -> str | None:
         with open(text_ori, "r", encoding="utf-8") as f_get_pc:
             try:
                 text_inner = f_get_pc.readline()
-                print(text_inner)
                 while text_inner:
                     return text_inner
                 print("该文本为空。 请重新输入")
