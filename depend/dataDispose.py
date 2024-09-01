@@ -247,12 +247,16 @@ def writeChinese(key_result: int, text_w: str = None, path_open: str = None, pat
         print("破译结果:", end="")
         translator = Translator(to_lang="zh")
         line_out = decode(key_result, text_w)
-        for sentence in line_out.strip().split("."):
-            if sentence == "":
-                continue
-            tr[index_tr] = translator.translate(sentence)
-            print(tr[index_tr], end=".")
-            index_tr += 1
+        if re.search(r".", line_out):
+            for sentence in line_out.strip().split("."):
+                if sentence == "":
+                    continue
+                tr[index_tr] = translator.translate(sentence)
+                print(tr[index_tr], end=".")
+                index_tr += 1
+        else:
+            tr[index_tr] = translator.translate(line_out)
+            print(tr[index_tr], end="")
     else:
         sen_txt: int = 0
         len_txt: int = 0
@@ -306,7 +310,6 @@ def decodeBase(original_text: str) -> tuple[list[str], list[int]] | None:
     original_text = original_text.strip()
     mid_text_ = re.sub(r"[\W\s]+", " ", original_text)
     new_text_ = re.match(r"\b(\w+\s?){1,4}\b", mid_text_)
-    print("破译文本:", new_text_)
     if new_text_ is None:
         print("无破译文本")
         return None
